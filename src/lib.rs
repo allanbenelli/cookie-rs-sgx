@@ -79,6 +79,11 @@
 #![doc(html_root_url = "https://docs.rs/cookie/0.16")]
 #![deny(missing_docs)]
 
+// ensure we don't import any parts of the std library - we use sgx_tstd instead
+#![no_std]
+#[macro_use]
+extern crate sgx_tstd as std;
+
 pub use time;
 
 mod builder;
@@ -100,6 +105,7 @@ use std::ascii::AsciiExt;
 
 #[cfg(feature = "percent-encode")]
 use percent_encoding::{AsciiSet, percent_encode as encode};
+ 
 use time::{Duration, OffsetDateTime, UtcOffset, macros::datetime};
 
 use crate::parse::parse_cookie;
